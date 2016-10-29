@@ -12,6 +12,7 @@ fileprivate extension NSTouchBarItemIdentifier {
     static let kome = NSTouchBarItemIdentifier("jp.mzp.touchbar.kome")
     static let fish = NSTouchBarItemIdentifier("jp.mzp.touchbar.fish")
     static let sushi = NSTouchBarItemIdentifier("jp.mzp.touchbar.sushi")
+    static let lane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane")
 }
 
 @available(OSX 10.12.1, *)
@@ -34,14 +35,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTouchBarProvider, NSTouchB
             window.contentView?.addSubview(sushi)
         }
 
-        self.touchBar = makeTouchBar()
+        self.touchBar = makePrimaryTouchBar()
     }
 
 
-    func makeTouchBar() -> NSTouchBar? {
+    func makePrimaryTouchBar() -> NSTouchBar {
         let mainBar = NSTouchBar()
         mainBar.delegate = self
         mainBar.defaultItemIdentifiers = [.kome, .fish, .sushi]
+        return mainBar
+    }
+
+    func makeSecondaryTouchBar() -> NSTouchBar {
+        let mainBar = NSTouchBar()
+        mainBar.delegate = self
+        mainBar.defaultItemIdentifiers = [.lane]
         return mainBar
     }
 
@@ -56,10 +64,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTouchBarProvider, NSTouchB
             let button = NSButton(title: "🐟", target: self, action: #selector(AppDelegate.tapped(_:)))
             item.view = button
             return item
-        } else if identifier == .sushi {
+        } else if identifier == .lane {
             let item = NSCustomTouchBarItem(identifier: identifier)
-            let button = NSButton(title: "🍣", target: self, action: #selector(AppDelegate.tapped(_:)))
-            item.view = button
+            item.viewController = SushiLaneController()
+            return item
+        } else if identifier == .sushi {
+            let item = NSPopoverTouchBarItem(identifier: identifier)
+            item.collapsedRepresentationLabel = "🍣"
+            item.popoverTouchBar = makeSecondaryTouchBar()
             return item
         } else {
             return nil
