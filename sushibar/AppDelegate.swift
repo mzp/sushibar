@@ -15,7 +15,7 @@ fileprivate extension NSTouchBarItemIdentifier {
     static let lane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane")
 }
 
-@available(OSX 10.12.1, *)
+@available(OSX 10.12.2, *)
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSTouchBarProvider, NSTouchBarDelegate {
 
