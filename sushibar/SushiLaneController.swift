@@ -12,7 +12,6 @@ import AppKit
 class SushiLaneController : NSViewController {
     let lane = NSView()
     var mvString="🍣"
-
     
     override func loadView() {
         self.view = NSView()
@@ -24,8 +23,8 @@ class SushiLaneController : NSViewController {
 
         self.view.addSubview(lane)
 
-        for x in 0...40 {
-            lane.addSubview(makeSushi(x: x * 40))
+        for x in 0...16 {
+            lane.addSubview(makeSushi(x: x * 100))
         }
         start()
     }
@@ -35,15 +34,14 @@ class SushiLaneController : NSViewController {
     }
     
     func makeSushi(x : Int) -> NSView {
-        let sushi = NSTextView(frame: NSRect(x: x, y: 0, width: 40, height: 30))
-        sushi.string = self.mvString
+        let sushi = NSTextView(frame: NSRect(x: x, y: 0, width: 30, height: 30))
+        sushi.string = mvString
         sushi.drawsBackground = false
         sushi.isEditable = false
         sushi.isSelectable = false
         sushi.font = NSFont.systemFont(ofSize: 20)
         return sushi
     }
-    
 
     func start() {
         let animation = CABasicAnimation(keyPath: "position")

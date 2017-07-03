@@ -49,10 +49,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTouchBarProvider, NSTouchB
         return mainBar
     }
 
-    func makeSecondaryTouchBar(tLane _lane:NSTouchBarItemIdentifier) -> NSTouchBar {
+    func makeSecondaryTouchBar(tLane _tLane:NSTouchBarItemIdentifier) -> NSTouchBar {
         let mainBar = NSTouchBar()
         mainBar.delegate = self
-        mainBar.defaultItemIdentifiers = [_lane]
+        mainBar.defaultItemIdentifiers = [_tLane]
         return mainBar
     }
 
