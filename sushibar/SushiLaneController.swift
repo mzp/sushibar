@@ -11,7 +11,8 @@ import AppKit
 
 class SushiLaneController : NSViewController {
     let lane = NSView()
-
+    var mvString="🍣"
+    
     override func loadView() {
         self.view = NSView()
     }
@@ -25,13 +26,16 @@ class SushiLaneController : NSViewController {
         for x in 0...16 {
             lane.addSubview(makeSushi(x: x * 100))
         }
-
         start()
     }
 
+    func setStr(str: String){
+        mvString = str
+    }
+    
     func makeSushi(x : Int) -> NSView {
         let sushi = NSTextView(frame: NSRect(x: x, y: 0, width: 30, height: 30))
-        sushi.string = "🍣"
+        sushi.string = mvString
         sushi.drawsBackground = false
         sushi.isEditable = false
         sushi.isSelectable = false
