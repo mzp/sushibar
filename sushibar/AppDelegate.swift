@@ -8,14 +8,15 @@
 
 import Cocoa
 
-fileprivate extension NSTouchBarItemIdentifier {
-    static let kome = NSTouchBarItemIdentifier("jp.mzp.touchbar.kome")
-    static let fish = NSTouchBarItemIdentifier("jp.mzp.touchbar.fish")
-    static let sushi = NSTouchBarItemIdentifier("jp.mzp.touchbar.sushi")
+@available(macOS 10.12.2, *)
+fileprivate extension NSTouchBarItem.Identifier {
+    static let kome = NSTouchBarItem.Identifier("jp.mzp.touchbar.kome")
+    static let fish = NSTouchBarItem.Identifier("jp.mzp.touchbar.fish")
+    static let sushi = NSTouchBarItem.Identifier("jp.mzp.touchbar.sushi")
 //    static let lane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane")
-    static let komelane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane.kome")
-    static let fishlane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane.fish")
-    static let sushilane = NSTouchBarItemIdentifier("jp.mzp.touchbar.lane.sushi")
+    static let komelane = NSTouchBarItem.Identifier("jp.mzp.touchbar.lane.kome")
+    static let fishlane = NSTouchBarItem.Identifier("jp.mzp.touchbar.lane.fish")
+    static let sushilane = NSTouchBarItem.Identifier("jp.mzp.touchbar.lane.sushi")
 }
 
 @available(OSX 10.12.2, *)
@@ -49,14 +50,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTouchBarProvider, NSTouchB
         return mainBar
     }
 
-    func makeSecondaryTouchBar(tLane _tLane:NSTouchBarItemIdentifier) -> NSTouchBar {
+    func makeSecondaryTouchBar(tLane _tLane:NSTouchBarItem.Identifier) -> NSTouchBar {
         let mainBar = NSTouchBar()
         mainBar.delegate = self
         mainBar.defaultItemIdentifiers = [_tLane]
         return mainBar
     }
 
-    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItemIdentifier) -> NSTouchBarItem? {
+    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
         if identifier == .kome {
             let item = NSPopoverTouchBarItem(identifier: identifier)
             item.collapsedRepresentationLabel = "🍚"
